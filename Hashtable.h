@@ -11,23 +11,35 @@ using namespace std;
 class Hashtable {
 
   public:
+    vector<pair<string, int>> table;
 
     Hashtable(int size);
 
     bool isPrime(int i);
     int nextPrime(int i);
 
-    int exists(string ip);
+    int findString(string ip);
+    int findIndex(int index);
+    
     bool isEmpty(int i);
 
     int hash(string ip);
     
     void insertItem(string ip, int index);
-    void deleteItem(int i);
+    void deleteItem();
+
+    pair<string,int> get(int i);
+    void set(string ip,int val, int i);
+
+    int getSize(){
+      return table.size();
+    };
+
+    void set(int i, int val);
 
   private:
     int size;
-    vector<pair<string, int>> table;
+
 };
 
 

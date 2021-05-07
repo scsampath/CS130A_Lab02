@@ -4,28 +4,32 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <utility>
+#include <tuple>
 
 using namespace std;
 
 class Minheap {
 
 public:
+
+    struct Node{
+        int frequency;
+        int count;
+        string str;
+    };
+
     //constructor
     Minheap(int size);
  
     //inserts new element into vector and calls heapify
-    void insert();
+    void insert(string input);
 
     void increment(int i);
 
-    void push();
+    void push(string input);
 
-    //if vector is full then element is added at root and heapify is called
-    void add(int element);
- 
     //get element i from heap
-    pair<int,int> get(int i);
+    Node get(int i);
 
     //get size of heap
     int getSize();
@@ -39,9 +43,11 @@ public:
     //heapify upwards, used for when element is inserted
     void heapify_up(int i);
 
+    void del(int i);
+
 private:
     int counter;
     int size;
-    vector<pair<int, int>> heap;
+    vector<Node> heap;
 };
 #endif

@@ -5,7 +5,7 @@ using namespace std;
 
 Hashtable::Hashtable(int size){
   this->size = nextPrime(size);
-  table.reserve(nextPrime(size));
+  table.resize(nextPrime(size));
 }
 
 bool Hashtable::isPrime(int n){
@@ -42,14 +42,24 @@ int Hashtable::nextPrime(int n){
     return prime;
 }
 
-int Hashtable::exists(string ip){
+int Hashtable::findString(string ip){
     for(int i = 0; i < this->size; i++){
         if(table[i].first == ip){
-            return 0;
+            return i;
         }
     }
     return -1;
 }
+
+int Hashtable::findIndex(int index){
+    for(int i = 0; i < this->size; i++){
+        if(table[i].second == index){
+            return i;
+        }
+    }
+    return -1;
+}
+
 bool Hashtable::isEmpty(int i){
     if(table[i].first == "" && table[i].second == 0){
         return true;
@@ -72,16 +82,26 @@ int Hashtable::hash(string ip){
 void Hashtable::insertItem(string ip, int index){
     int key = hash(ip);
     for(int i = 0; i < size; i++){
-        int quad = (key + i * i) % size;
+        int quad = (key + i*i) % size;
         if(isEmpty(quad)){
             table[quad].first = ip;
             table[quad].second = index;
+            break;
         }
     }
 }
-void Hashtable::deleteItem(int i) {
-    table[i].first = "";
-    table[i].second = 0;
+void Hashtable::deleteItem() {
+    int del = findIndex(1);
+    table[del].first = "";
+    table[del].second = 0;
+}
+
+pair<string,int> Hashtable::get(int i){
+    return table[i];
+}
+
+void Hashtable::set(int i, int val){
+    table[i].second = val;
 }
 
 
